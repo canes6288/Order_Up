@@ -10,10 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180220184714) do
+ActiveRecord::Schema.define(version: 20180220213116) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "items", force: :cascade do |t|
+    t.string   "name"
+    t.decimal  "price"
+    t.integer  "restaurant_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "items_orders", id: false, force: :cascade do |t|
+    t.integer "item_id",  null: false
+    t.integer "order_id", null: false
+    t.index ["item_id", "order_id"], name: "index_items_orders_on_item_id_and_order_id", using: :btree
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "number"
+    t.string   "location"
+    t.integer  "restaurant_id"
+    t.integer  "user_id"
+    t.string   "section"
+    t.integer  "seat"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "restaurants", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

@@ -39,6 +39,9 @@ gem 'bootstrap', '~> 4.0.0'
 gem 'devise'
 gem 'haml'
 
+# Rails console error fix
+gem'rb-readline'
+
 group :development, :test do
   gem 'pry'
 end
