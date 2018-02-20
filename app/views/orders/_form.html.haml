@@ -1,0 +1,32 @@
+= form_for(order) do |f|
+  - if order.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(order.errors.count, "error")
+        prohibited this order from being saved:
+      %ul
+        - order.errors.full_messages.each do |message|
+          %li= message
+  .row
+    .col-md-3
+      .panel
+        .field
+          = f.label :restaurant_id
+          = f.select :restaurant_id, Restaurant.all.collect { |r| [ r.name, r.id ] }, prompt: 'Restaurant'
+      .panel
+        .field
+          = f.label :section
+          = f.select :section, Order::SECTION.collect { |s| [ s ] }, prompt: 'Section'
+      .panel
+        .field
+          = f.label :seat
+          = f.select :seat, (1..50).collect { |s| [ s ] }, prompt: 'Seat'
+      .actions
+        = f.submit
+    .col-md-5
+      - Item.all.each do |item|
+        .panel
+          = item.name
+    .col-md-4
+      .panel
+        Current Sale

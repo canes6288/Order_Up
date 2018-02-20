@@ -6,6 +6,11 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+User.delete_all
+Restaurant.delete_all
+Order.delete_all
+Item.delete_all
+
 ##################
 #     USERS      #
 ##################
@@ -43,17 +48,17 @@ order = Order.create(
 order.items.create(
 		name: 'Pretzels and Cheese',
 		price: 3.99,
-		restaurant_id: 1,
+		restaurant_id: restaurant.id,
 	)
 
 order.items.create(
 		name: 'Baklava',
 		price: 2.99,
-		restaurant_id: 1,
+		restaurant_id: restaurant.id,
 	)
 
 order.items.create(
 		name: 'Ham',
 		price: 12.99,
-		restaurant_id: 1,
+		restaurant_id: restaurant.id,
 	)
