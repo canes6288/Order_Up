@@ -1,6 +1,5 @@
 FactoryBot.define do
 	factory :item do
-		association :restaurant
 		name	{ Faker::Dessert.variety }
 		price { Faker::Number.decimal(2) }
 	end

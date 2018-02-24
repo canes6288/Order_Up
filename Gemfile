@@ -40,13 +40,15 @@ gem 'bootstrap', '~> 4.0.0'
 gem 'devise'
 gem 'haml'
 
+# Allows nested attributes for forms
+gem 'nested_form'
+
 # Rails console error fix
 gem'rb-readline'
 
 group :development, :test do
   gem 'pry'
   # Strategies to clean database after running tests
-  gem 'database_cleaner'
   gem 'capybara'
   # For Javascript testing with headless browser
   gem "capybara-webkit"
@@ -70,7 +72,8 @@ group :development do
 end
 
 group:test do
-  gem 'rspec-rails' 
+  gem 'rspec-rails'
+  gem 'database_cleaner' 
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

@@ -15,6 +15,7 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @order = Order.new
+    @order.items.build
   end
 
   # GET /orders/1/edit
@@ -24,7 +25,15 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
+    binding.pry
     @order = Order.new(order_params)
+    item_ids = params[:items_attributes].pluck(:id).map(&:to_i)
+
+    # Add item to the order
+    build_items_for_order(item_ids)
+
+    # Set user_id to the sender's id
+    @order.user_id = current_user.id
 
     respond_to do |format|
       if @order.save
@@ -62,6 +71,13 @@ class OrdersController < ApplicationController
   end
 
   private
+    def build_items_for_order(item_ids)
+      item_ids.each do |item_id|
+        binding.pry
+        @order.items << Item.find(item_id)
+      end
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_order
       @order = Order.find(params[:id])
@@ -69,6 +85,12 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:number, :location, :restaurant_id, :user_id, :section, :seat)
+      params.require(:order).permit(:number, 
+                                    :location, 
+                                    :restaurant_id, 
+                                    :user_id, 
+                                    :section, 
+                                    :seat
+                                  )
     end
 end

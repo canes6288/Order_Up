@@ -1,4 +1,4 @@
-= form_for(order) do |f|
+= form_for order do |f|
   - if order.errors.any?
     #error_explanation
       %h2
@@ -23,11 +23,24 @@
           = f.select :seat, (1..50).collect { |s| [ s ] }, prompt: 'Seat'
       .actions
         = f.submit
-    .col-md-5
+    .col-md-5.items
       - Item.all.each do |item|
-        .panel
+        .panel{ id: item.id}
+          / = f.hidden_field :item_id, value: item.id
           = item.name
-          %button.btn.btn-success{:type => "button"} + Add Item
+          %button.btn.btn-success{ type: "button", data: { action: 'add-item' } } Add Item
     .col-md-4
-      .panel
-        Current Sale
+      Current Sale
+      .panel#current_sale
+
+:javascript
+  $(document).ready(function() {
+    $("[data-action='add-item']").click(function() {
+      itemId = $(this).closest('.panel').attr('id')
+      $('<input>').attr({
+        type: 'hidden',
+        name: "items_attributes[][id]",
+        value: itemId
+      }).appendTo('form');
+    });
+  });
