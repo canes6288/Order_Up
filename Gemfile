@@ -36,6 +36,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem 'bootstrap', '~> 4.0.0'
+# Auth
 gem 'devise'
 gem 'haml'
 
@@ -44,9 +45,22 @@ gem'rb-readline'
 
 group :development, :test do
   gem 'pry'
+  # Strategies to clean database after running tests
+  gem 'database_cleaner'
+  gem 'capybara'
+  # For Javascript testing with headless browser
+  gem "capybara-webkit"
+  # launches save_and_open_page automatically
+  gem 'launchy'
+  # Fixtures replacement
+  gem 'factory_bot_rails'
+  # Generate random fake names, emails, etc for tests
+  gem 'faker'
 end
 
 group :development do
+  # Automatically & intelligently launch specs when files are modified
+  gem 'guard-rspec', require: false
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '~> 3.0.5'
@@ -56,8 +70,7 @@ group :development do
 end
 
 group:test do
-  gem 'rspec-rails'
-  gem 'capybara' 
+  gem 'rspec-rails' 
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
