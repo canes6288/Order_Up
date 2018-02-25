@@ -11,16 +11,28 @@
     .col-md-3
       .panel
         .field
-          = f.label :restaurant_id
-          = f.select :restaurant_id, Restaurant.all.collect { |r| [ r.name, r.id ] }, prompt: 'Restaurant'
+          .row.location-selection
+            .col-md-12
+              = f.label :restaurant_id
+              %hr
+            .col-md-12
+              = f.select :restaurant_id, Restaurant.all.collect { |r| [ r.name, r.id ] }, prompt: 'Restaurant'
       .panel
         .field
-          = f.label :section
-          = f.select :section, Order::SECTION.collect { |s| [ s ] }, prompt: 'Section'
+          .row.location-selection
+            .col-md-12
+              = f.label :section
+              %hr
+            .col-md-12
+              = f.select :section, Order::SECTION.collect { |s| [ s ] }, prompt: 'Section'
       .panel
         .field
-          = f.label :seat
-          = f.select :seat, (1..50).collect { |s| [ s ] }, prompt: 'Seat'
+          .row.location-selection
+            .col-md-12
+              = f.label :seat
+              %hr
+            .col-md-12
+              = f.select :seat, (1..50).collect { |s| [ s ] }, prompt: 'Seat'
       .actions
         = f.submit
     .col-md-5.items
