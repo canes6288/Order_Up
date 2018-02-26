@@ -38,21 +38,29 @@
     .col-md-5.items
       - Item.all.each do |item|
         .panel{ id: item.id}
-          / = f.hidden_field :item_id, value: item.id
-          = item.name
-          %button.btn.btn-success{ type: "button", data: { action: 'add-item' } } Add Item
+          .row
+            .col-md-7.name
+              = f.hidden_field :item_name, value: item.name
+              = item.name
+            .col-md-2.price
+              = number_to_currency(item.price)
+            .col-md-2
+              %button.btn.btn-success{ type: "button", data: { action: 'add-item' } } Add Item
     .col-md-4
       Current Sale
-      .panel#current_sale
+      .panel.current-sale
 
 :javascript
   $(document).ready(function() {
     $("[data-action='add-item']").click(function() {
       itemId = $(this).closest('.panel').attr('id')
+      itemName = $(this).closest('.row').find("[name='order[item_name]']").val()
+      itemNameHTML = "<div class='row'><div class='col-md-12'>" + itemName + "</div>" + "</div>"
       $('<input>').attr({
         type: 'hidden',
         name: "items_attributes[][id]",
         value: itemId
       }).appendTo('form');
+      $('.current-sale').append(itemNameHTML)
     });
   });

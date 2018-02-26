@@ -6,12 +6,35 @@ body {
 	background: #F7F7F7;
 }
 
+
 hr {
 	color: #F7F7F7;
 	height: 1px;
 	margin-bottom: 0px;
 	margin-right: 20px;
 	margin-top: 0px;
+}
+
+.items .btn-success {
+	background: #7ED321;
+	border: solid #7ED321 1px;
+}
+
+.items .name {
+	font-size: 16px;
+	padding-top: 5px;
+}
+
+.items .price {
+	font-size: 16px;
+	padding-top: 5px;
+}
+
+.items .panel {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	height: inherit;
+	padding: 15px;
+	padding-left: 20px;
 }
 
 #main-container {
@@ -27,6 +50,11 @@ hr {
 	margin-top: 10px;
 	padding-left: 20px;
 	padding-top: 10px;
+}
+
+.panel.current-sale{
+	height: inherit;
+	min-height: 200px;
 }
 
 

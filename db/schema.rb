@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180220213116) do
+ActiveRecord::Schema.define(version: 20180225212900) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,10 +23,12 @@ ActiveRecord::Schema.define(version: 20180220213116) do
     t.datetime "updated_at",    null: false
   end
 
-  create_table "items_orders", id: false, force: :cascade do |t|
-    t.integer "item_id",  null: false
-    t.integer "order_id", null: false
-    t.index ["item_id", "order_id"], name: "index_items_orders_on_item_id_and_order_id", using: :btree
+  create_table "line_items", force: :cascade do |t|
+    t.integer  "order_id"
+    t.integer  "item_id"
+    t.text     "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "orders", force: :cascade do |t|

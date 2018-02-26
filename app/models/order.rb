@@ -1,6 +1,7 @@
 class Order < ApplicationRecord
 	has_many :restaurants
-	has_and_belongs_to_many :items
+	has_many :line_items
+	has_many :items, through: :line_items
 	accepts_nested_attributes_for :items, allow_destroy: true
 
 	validates_presence_of :restaurant_id

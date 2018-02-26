@@ -45,20 +45,28 @@ order = Order.create(
 #     ITEMS      #
 ##################
 
-order.items.create(
+item_1 = Item.create(
 		name: 'Pretzels and Cheese',
 		price: 3.99,
 		restaurant_id: restaurant.id,
 	)
 
-order.items.create(
+item_2 = Item.create(
 		name: 'Baklava',
 		price: 2.99,
 		restaurant_id: restaurant.id,
 	)
 
-order.items.create(
+item_3 = Item.create(
 		name: 'Ham',
 		price: 12.99,
 		restaurant_id: restaurant.id,
 	)
+
+#######################
+#     LINE ITEMS      #
+#######################
+
+LineItem.create(order: order, item: item_1, notes: 'No salt on the pretzel')
+LineItem.create(order: order, item: item_2, notes: nil)
+LineItem.create(order: order, item: item_3, notes: nil)

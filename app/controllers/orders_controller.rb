@@ -25,7 +25,6 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
-    binding.pry
     @order = Order.new(order_params)
     item_ids = params[:items_attributes].pluck(:id).map(&:to_i)
 
@@ -73,8 +72,7 @@ class OrdersController < ApplicationController
   private
     def build_items_for_order(item_ids)
       item_ids.each do |item_id|
-        binding.pry
-        @order.items << Item.find(item_id)
+        @order.line_items.build(order: @order, item_id: item_id)
       end
     end
 
