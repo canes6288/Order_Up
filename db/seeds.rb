@@ -63,10 +63,28 @@ item_3 = Item.create(
 		restaurant_id: restaurant.id,
 	)
 
+item_4 = Item.create(
+		name: 'Chicken Noodle Soup',
+		price: 222.99,
+		restaurant_id: restaurant.id,
+	)
+
 #######################
 #     LINE ITEMS      #
 #######################
 
 LineItem.create(order: order, item: item_1, notes: 'No salt on the pretzel')
+LineItem.create(order: order, item: item_1, notes: 'No salt on the pretzel')
+LineItem.create(order: order, item: item_1, notes: 'This pretzel should be soft')
+LineItem.create(order: order, item: item_1, notes: nil)
+LineItem.create(order: order, item: item_1, notes: nil)
+
 LineItem.create(order: order, item: item_2, notes: nil)
+LineItem.create(order: order, item: item_2, notes: nil)
+LineItem.create(order: order, item: item_2, notes: nil)
+
 LineItem.create(order: order, item: item_3, notes: nil)
+
+LineItem.create(order: order, item: item_4, notes: nil)
+LineItem.create(order: order, item: item_4, notes: 'Add more chicken')
+LineItem.create(order: order, item: item_4, notes: nil)

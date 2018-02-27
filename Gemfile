@@ -36,8 +36,13 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem 'bootstrap', '~> 4.0.0'
+
 # Auth
 gem 'devise'
+
+# Cool icons
+gem "font-awesome-rails"
+
 gem 'haml'
 
 # Allows nested attributes for forms

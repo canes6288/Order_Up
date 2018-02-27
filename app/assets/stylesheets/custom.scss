@@ -6,6 +6,10 @@ body {
 	background: #F7F7F7;
 }
 
+.hidden {
+	display: none;
+}
+
 
 hr {
 	color: #F7F7F7;
@@ -41,6 +45,48 @@ hr {
 	padding-left: 50px;
 	padding-right: 50px;
 	padding-top: 30px;
+}
+
+.orders .complete-btn {
+	height: 60px;
+	width: 100%;
+	font-size: 24px;
+	background: #14B1FF;
+	border: solid #14B1FF 1px;
+}
+
+.orders .edit-link {
+	color: #14B1FF;
+	font-size: 18px;
+	margin-left: 10px;
+}
+
+.orders .details .header {
+	font-size: 32px;
+	font-weight: 600;
+	padding-top: 5px;
+}
+
+.orders .items {
+	font-size: 18px;
+	margin-top: 20px;
+}
+
+.orders .items .header {
+	font-size: 24px;
+	font-weight: 600;
+	margin-bottom: 10px;
+}
+
+.orders .items hr {
+	margin-bottom: 20px;
+}
+
+.orders .panel {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	height: inherit;
+	padding-top: 0px;
+	margin-bottom: 30px;
 }
 
 .panel {
