@@ -7,6 +7,10 @@
       %ul
         - order.errors.full_messages.each do |message|
           %li= message
+  %form
+    %label
+      Say something:
+    %input{"data-behavior" => "order_creator", :type => "text"}/
   .row
     .col-md-3
       .panel
