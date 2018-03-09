@@ -9,10 +9,16 @@ class Order < ApplicationRecord
 	validates_presence_of :seat
 
 	before_save :set_location
+	after_commit :broadcast_notification, on: :create
+
 
 	SECTION = ['A', 'B', 'C', 'D', 'E']
 
 	private
+
+		def broadcast_notification
+		  ActionCable.server.broadcast "order_channel", order_id: self.id
+		end
 
 		def set_location
 			self.location = ['A', 'B', 'C'].include?(section) ? 'BREW' : 'COMD'

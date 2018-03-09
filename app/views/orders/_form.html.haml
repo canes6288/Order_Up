@@ -7,10 +7,8 @@
       %ul
         - order.errors.full_messages.each do |message|
           %li= message
-  %form
-    %label
-      Say something:
-    %input{"data-behavior" => "order_creator", :type => "text"}/
+          
+  = f.hidden_field :restaurant_id, value: '1'
   .row
     .col-md-3
       .panel
