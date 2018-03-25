@@ -7,13 +7,11 @@
       %ul
         - order.errors.full_messages.each do |message|
           %li= message
-          
-  = f.hidden_field :restaurant_id, value: '1'
-  .row
-    .col-md-3
+  .row.new-order
+    .col-md-3.section.location-selection
       .panel
         .field
-          .row.location-selection
+          .row
             .col-md-12
               = f.label :restaurant_id
               %hr
@@ -21,7 +19,7 @@
               = f.select :restaurant_id, Restaurant.all.collect { |r| [ r.name, r.id ] }, prompt: 'Restaurant'
       .panel
         .field
-          .row.location-selection
+          .row
             .col-md-12
               = f.label :section
               %hr
@@ -29,40 +27,76 @@
               = f.select :section, Order::SECTION.collect { |s| [ s ] }, prompt: 'Section'
       .panel
         .field
-          .row.location-selection
+          .row
             .col-md-12
               = f.label :seat
               %hr
             .col-md-12
               = f.select :seat, (1..50).collect { |s| [ s ] }, prompt: 'Seat'
-      .actions
-        = f.submit
-    .col-md-5.items
+    .col-md-5.items.section
+      %label
+        Items
       - Item.all.each do |item|
         .panel{ id: item.id}
           .row
-            .col-md-7.name
+            .col-md-5.name
               = f.hidden_field :item_name, value: item.name
               = item.name
-            .col-md-2.price
+            .col-md-3.price
               = number_to_currency(item.price)
-            .col-md-2
+            .col-md-3
               %button.btn.btn-success{ type: "button", data: { action: 'add-item' } } Add Item
-    .col-md-4
-      Current Sale
-      .panel.current-sale
+    .col-md-4.current-sale.section
+      .panel
+        %label
+          Current Sale
+        %hr
+        .items
+      .row
+        .text-center.col-md-12.actions
+          %button.btn.btn-primary{ type: "submit", class: 'send-order-btn', data: { action: 'complete-order' } } 
+            Send Order
+            = fa_icon "chevron-circle-right"
 
 :javascript
   $(document).ready(function() {
+    $('body').on('click', '.row.delete-item', function() {
+      $(this).closest('.row.item').remove()
+    })
+
     $("[data-action='add-item']").click(function() {
       itemId = $(this).closest('.panel').attr('id')
       itemName = $(this).closest('.row').find("[name='order[item_name]']").val()
-      itemNameHTML = "<div class='row'><div class='col-md-12'>" + itemName + "</div>" + "</div>"
+      itemNameHTML = "<div class='row item'>" +
+                      "<div class='col-md-6 item-name'>" + 
+                        itemName + 
+                      "</div>" + 
+                      "<div class='col-md-6 text-right'>" +
+                        "<i class='fa fa-times fa-2x delete-item'></i>" +
+                      "</div>" +
+                      "<div class='col-md-12 add-note'" +
+                        '<a>' +
+                          '+ Add Note'
+                        '</a>' +
+                    "</div>"
       $('<input>').attr({
         type: 'hidden',
         name: "items_attributes[][id]",
         value: itemId
       }).appendTo('form');
-      $('.current-sale').append(itemNameHTML)
+      $('.current-sale .items').append(itemNameHTML)
+
+      RefreshEventListener();
     });
+
+
+    function RefreshEventListener() {
+      // on.click() wasn't working for dynamically added items
+      // so the event listeners are reset every time an item is added
+      $(".delete-item").off(); 
+
+      $(".delete-item").on("click", function() {
+        $(this).closest('.row.item').remove()
+      })
+    }
   });

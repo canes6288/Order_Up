@@ -10,6 +10,6 @@ App.order = App.cable.subscriptions.create("OrderChannel", {
     // Called when the subscription has been terminated by the server
 
   received(data) {
-    alert(data['order_id'])
+  	$('.orders').append(data['html'])
   },
 });

@@ -69,6 +69,30 @@ item_4 = Item.create(
 		restaurant_id: restaurant.id,
 	)
 
+item_5 = Item.create(
+		name: 'Tuna Sandwich',
+		price: 3.39,
+		restaurant_id: restaurant.id,
+	)
+
+item_6 = Item.create(
+		name: 'Hamburger with pepperjack cheese',
+		price: 5.99,
+		restaurant_id: restaurant.id,
+	)
+
+item_7 = Item.create(
+		name: 'Garlic Naan',
+		price: 1.99,
+		restaurant_id: restaurant.id,
+	)
+
+item_8 = Item.create(
+		name: 'Peppermint Patty',
+		price: 77.99,
+		restaurant_id: restaurant.id,
+	)
+
 #######################
 #     LINE ITEMS      #
 #######################

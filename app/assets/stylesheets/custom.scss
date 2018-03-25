@@ -42,9 +42,66 @@ hr {
 }
 
 #main-container {
-	padding-left: 50px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.new-order .actions {
+	position: absolute; 
+	bottom: 0px;
+}
+
+.new-order label {
+	font-size: 24px;
+	font-weight: 600;
+}
+
+.new-order .section {
+	margin-top: 30px;
+}
+
+.new-order .section.items {
+	margin-top: 50px;
+	overflow-y: auto;
+  max-height: 665px;
+}
+
+.new-order .current-sale .panel {
+	margin-top: 10px;
+	padding-top: 10px;
+	height: inherit;
+	min-height: 98%;
+	border-bottom: none;
+}
+
+.send-order-btn {
+	height: 60px;
+	width: 100%;
+	font-size: 24px;
+	background: #14B1FF;
+	border: solid #14B1FF 1px;
+}
+
+.new-order .current-sale .add-note {
+	color:#14B1FF
+}
+
+.new-order .current-sale .item-name {
+	padding-top: 5px;
+	font-size: 18px;
+	margin-top: 20px;
+}
+
+.new-order .current-sale .items {
+	overflow-y: auto;
+	max-height: 550px;
+}
+
+.new-order .current-sale .delete-item {
+	color: red;
 	padding-right: 50px;
-	padding-top: 30px;
+	margin-top: 20px;
+	cursor: pointer;
 }
 
 .orders .complete-btn {
@@ -100,17 +157,11 @@ hr {
 
 .panel.current-sale{
 	height: inherit;
-	min-height: 200px;
+	min-height: 80%;
 }
 
-
-.panel .location-selection select {
+.location-selection select {
 	height: 40px;
 	margin-top: 25px;
 	width: 145px;
-}
-
-.panel .location-selection label {
-	font-size: 24px;
-  font-weight: 600;
 }
