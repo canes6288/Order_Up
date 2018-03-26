@@ -1,0 +1,60 @@
+= form_for(item) do |f|
+  - if item.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(item.errors.count, "error")
+        prohibited this item from being saved:
+      %ul
+        - item.errors.full_messages.each do |message|
+          %li= message
+  .row.new-item
+    .col-md-3.section
+      .panel
+        .field
+          .row
+            .col-md-12
+              = f.label :sold_out?
+              %hr
+            .col-md-12.sold-out-btn-group
+              .btn-group.btn-group-toggle{"data-toggle" => "buttons"}
+                %label.btn.btn-secondary{ class: "#{'active' if item.sold_out?} " }
+                  = f.radio_button :sold_out, true, :checked => item.sold_out?, autocomplete: "off"
+                  Yes
+                %label.btn.btn-secondary{ class: "#{'active' if item.available?} " }
+                  = f.radio_button :sold_out, false, :checked => item.available?, autocomplete: "off"
+                  No
+
+    .col-md-3.section.location-selection
+      .panel
+        .field
+          .row
+            .col-md-12
+              = f.label :restaurant_id
+              %hr
+            .col-md-12
+              = f.select :restaurant_id, Restaurant.all.collect { |r| [ r.name, r.id ] }, prompt: 'Restaurant'
+    .col-md-3.section
+      .panel
+        .field
+          .row
+            .col-md-12
+              = f.label :name
+              %hr
+            .col-md-12
+              = f.text_field :name
+    .col-md-3.section
+      .panel
+        .field
+          .row
+            .col-md-12
+              = f.label :price
+              %hr
+            .col-md-12
+              = f.text_field :price, value: number_with_precision(f.object.price, :precision => 2)
+    .row
+      .text-center.col-md-12
+        %button.btn.btn-primary.submit-btn{ type: "submit" }
+          = "#{item.persisted? ? 'Update Item' : 'Create Item'}"
+
+
+

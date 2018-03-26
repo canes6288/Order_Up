@@ -41,9 +41,52 @@ hr {
 	padding-left: 20px;
 }
 
+.location-selection select {
+	height: 40px;
+	margin-top: 25px;
+	font-size: 18px;
+	width: 90%;
+}
+
 #main-container {
 	padding-left: 15px;
 	padding-right: 15px;
+}
+
+.new-item label {
+	font-size: 24px;
+	font-weight: 600;
+}
+
+.new-item input {
+	height: 40px;
+	margin-top: 25px;
+	font-size: 18px;
+	width: 90%;
+	padding: 5px;
+}
+
+.new-item .sold-out-btn-group {
+	margin-top: 20px;
+}
+
+.new-item .sold-out-btn-group .btn-secondary {
+	padding-left: 30px;
+	padding-right: 30px;
+	background: #a8a8a8;
+	border: solid #a8a8a8 1px;
+}
+
+.new-item .sold-out-btn-group .btn-secondary.active {
+	padding-left: 30px;
+	padding-right: 30px;
+	background: #14B1FF;
+	border: solid #0e7bb2 2px;
+}
+
+.new-item .submit-btn {
+	margin-top: 30px;
+	margin-left: 15px;
 }
 
 .new-order .actions {
@@ -74,14 +117,6 @@ hr {
 	border-bottom: none;
 }
 
-.send-order-btn {
-	height: 60px;
-	width: 100%;
-	font-size: 24px;
-	background: #14B1FF;
-	border: solid #14B1FF 1px;
-}
-
 .new-order .current-sale .add-note {
 	color:#14B1FF
 }
@@ -102,6 +137,14 @@ hr {
 	padding-right: 50px;
 	margin-top: 20px;
 	cursor: pointer;
+}
+
+.submit-btn {
+	height: 60px;
+	width: 100%;
+	font-size: 24px;
+	background: #14B1FF;
+	border: solid #14B1FF 1px;
 }
 
 .orders .complete-btn {
@@ -160,8 +203,6 @@ hr {
 	min-height: 80%;
 }
 
-.location-selection select {
-	height: 40px;
-	margin-top: 25px;
-	width: 145px;
+table.table-striped {
+	font-size: 18px;
 }

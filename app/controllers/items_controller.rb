@@ -69,6 +69,9 @@ class ItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:name, :price, :restaurant_id)
+      price = params[:item][:price].to_s.gsub(/[^\d.]/, '')
+      params[:item][:price] = price
+
+      params.require(:item).permit(:name, :price, :restaurant_id, :sold_out)
     end
 end
