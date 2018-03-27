@@ -10,6 +10,7 @@ User.delete_all
 Restaurant.delete_all
 Order.delete_all
 Item.delete_all
+LineItem.delete_all
 
 ##################
 #     USERS      #

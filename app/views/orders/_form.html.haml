@@ -54,18 +54,18 @@
         .items
       .row
         .text-center.col-md-12.actions
-          %button.btn.btn-primary.submit-btn{ type: "submit", data: { action: 'complete-order' } } 
+          %button.btn.btn-primary.big-blue-btn{ type: "submit", data: { action: 'complete-order' } } 
             Send Order
             = fa_icon "chevron-circle-right"
 
 :javascript
   $(document).ready(function() {
-    / Delete Item
+    // Delete Item
     $('body').on('click', '.row.delete-item', function() {
       $(this).closest('.row.item').remove()
     })
 
-    / Add Item to Order
+    // Add Item to Order
     $("[data-action='add-item']").click(function() {
       itemId = $(this).closest('.panel').attr('id')
       itemName = $(this).closest('.row').find("[name='order[item_name]']").val()

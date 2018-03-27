@@ -51,6 +51,9 @@ gem 'nested_form'
 # Rails console error fix
 gem'rb-readline'
 
+# calling destroy on an ActiveRecord object without actually destroying it
+gem "paranoia", "~> 2.2"
+
 group :development, :test do
   gem 'pry'
   # Strategies to clean database after running tests
@@ -66,6 +69,10 @@ group :development, :test do
 end
 
 group :development do
+  # # Better error pages for development purposes
+  gem "better_errors"
+  gem "binding_of_caller"
+  gem 'debug_inspector'
   # Automatically & intelligently launch specs when files are modified
   gem 'guard-rspec', require: false
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
