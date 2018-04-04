@@ -3,7 +3,7 @@
     .panel
       .row.details
         .col-md-10.header
-          = "##{order.number} #{order.location} - #{order.section}#{order.seat}"
+          = "##{order.number} #{order.location} - #{order.section}#{order.seat} (#{order.created_at.strftime("%-l:%M %p")})"
           = link_to 'Edit Order', edit_order_path(order), class: 'edit-link'
         .col-md-2.text-right
           %button.btn.btn-primary{ type: "button", class: 'complete-btn', data: { action: 'complete-order' } } 

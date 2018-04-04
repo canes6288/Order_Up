@@ -26,7 +26,8 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new(order_params)
-    item_ids = params[:items_attributes].pluck(:id).map(&:to_i)
+
+    render :new and return if item_attributes.nil?
 
     # Add item to the order
     build_items_for_order(item_ids)
@@ -74,6 +75,14 @@ class OrdersController < ApplicationController
       item_ids.each do |item_id|
         @order.line_items.build(order: @order, item_id: item_id)
       end
+    end
+
+    def item_attributes
+      params[:item_attributes]
+    end
+
+    def item_ids
+      item_attributes.pluck(:id).map(&:to_i)
     end
 
     # Use callbacks to share common setup or constraints between actions.
