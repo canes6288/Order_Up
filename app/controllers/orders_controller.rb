@@ -4,7 +4,8 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.where(restaurant_id: params[:restaurant_id])
+    @restaurant = Restaurant.find(params[:restaurant_id])
+    @orders = Order.where(restaurant: @restaurant)
   end
 
   # GET /orders/1
@@ -27,7 +28,9 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
 
-    render :new and return if item_attributes.nil?
+    if items_attributes.nil?
+      render :new and return if items_attributes.nil?
+    end
 
     # Add item to the order
     build_items_for_order(item_ids)
@@ -35,14 +38,10 @@ class OrdersController < ApplicationController
     # Set user_id to the sender's id
     @order.user_id = current_user.id
 
-    respond_to do |format|
-      if @order.save
-        format.html { redirect_to @order, notice: 'Order was successfully created.' }
-        format.json { render :show, status: :created, location: @order }
-      else
-        format.html { render :new }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
-      end
+    if @order.save
+      redirect_to new_order_path, notice: 'Order was successfully created.'
+    else
+      render :new
     end
   end
 
@@ -64,10 +63,7 @@ class OrdersController < ApplicationController
   # DELETE /orders/1.json
   def destroy
     @order.destroy
-    respond_to do |format|
-      format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to orders_path(restaurant_id: @order.restaurant), notice: 'Order completed.'
   end
 
   private
@@ -77,12 +73,12 @@ class OrdersController < ApplicationController
       end
     end
 
-    def item_attributes
-      params[:item_attributes]
+    def items_attributes
+      params[:items_attributes]
     end
 
     def item_ids
-      item_attributes.pluck(:id).map(&:to_i)
+      items_attributes.pluck(:id).map(&:to_i)
     end
 
     # Use callbacks to share common setup or constraints between actions.

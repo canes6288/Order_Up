@@ -1,5 +1,7 @@
 class Order < ApplicationRecord
-	has_many :restaurants
+	acts_as_paranoid
+
+	belongs_to :restaurant
 	has_many :line_items
 	has_many :items, through: :line_items
 	accepts_nested_attributes_for :items, allow_destroy: true
