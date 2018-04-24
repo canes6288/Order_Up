@@ -33,12 +33,6 @@ RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   # config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
-  Capybara.javascript_driver = :webkit
-
-  Capybara::Webkit.configure do |config|
-    config.allow_url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700")
-  end
-
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
@@ -63,4 +57,17 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  config.before(:suite) do
+    Rails.application.load_tasks
+    Rake::Task["assets:precompile"].invoke
+  end
+end
+
+Capybara.javascript_driver = :selenium
+Capybara.current_driver = Capybara.javascript_driver
+Capybara.server = :puma
+
+Capybara::Webkit.configure do |config|
+  config.allow_url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700")
 end

@@ -14,6 +14,9 @@
       <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
         <% if user_signed_in? %>
+          <li class='nav-item'>
+            <%= link_to 'Orders', restaurants_path, :class => 'nav-link' %>
+          </li>
           <li class="nav-item">
             <%= link_to 'Items', items_path, :class => 'nav-link' %>
           </li>
@@ -45,6 +48,15 @@
           <%= yield %>
         </div>
       </div>
+      
+      <% if Rails.env.development? %>
+        <div class="row">
+          <div class="col-xs-12">
+            <%= params %>
+          </div>
+        </div>
+      <% end %>
     </div>
+
   </body>
 </html>

@@ -29,7 +29,8 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
 
     if items_attributes.nil?
-      render :new and return if items_attributes.nil?
+      flash.now[:alert] = 'Missing items'
+      return render :new
     end
 
     # Add item to the order

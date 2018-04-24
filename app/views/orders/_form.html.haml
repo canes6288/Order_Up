@@ -16,7 +16,7 @@
               = f.label :restaurant_id
               %hr
             .col-md-12
-              = f.select :restaurant_id, Restaurant.all.collect { |r| [ r.name, r.id ] }, prompt: 'Restaurant'
+              = f.select :restaurant_id, Restaurant.all.collect { |r| [ r.name, r.id ] }, prompt: 'Restaurant', selected: Restaurant.first&.id
       .panel
         .field
           .row
@@ -24,7 +24,7 @@
               = f.label :section
               %hr
             .col-md-12
-              = f.select :section, Order::SECTION.collect { |s| [ s ] }, prompt: 'Section'
+              = f.select :section, Order::SECTION.collect { |section| [ section ] }, prompt: 'Section'
       .panel
         .field
           .row
@@ -41,6 +41,7 @@
           .row
             .col-md-5.name
               = f.hidden_field :item_name, value: item.name
+              = f.hidden_field :item_price, value: item.price
               = item.name
             .col-md-3.price
               = number_to_currency(item.price)
@@ -48,8 +49,13 @@
               %button.btn.btn-success{ type: "button", data: { action: 'add-item' } } Add Item
     .col-md-4.current-sale.section
       .panel
-        %label
-          Current Sale
+        .row
+          .col-md-5
+            %label
+              Current Sale
+          .col-md-6.total
+            %label
+              $0.00
         %hr
         .items
       .row
@@ -59,27 +65,34 @@
             = fa_icon "chevron-circle-right"
 
 :javascript
+  console.log('hello from _form')
   $(document).ready(function() {
     // Delete Item
-    $('body').on('click', '.row.delete-item', function() {
-      $(this).closest('.row.item').remove()
+    $('body').on('click', '.delete-item', function() {
+      $(this).closest('.row.sale-item').remove()
+      calculateTotal()
     })
 
     // Add Item to Order
     $("[data-action='add-item']").click(function() {
-      itemId = $(this).closest('.panel').attr('id')
-      itemName = $(this).closest('.row').find("[name='order[item_name]']").val()
-      itemNameHTML = "<div class='row item'>" +
+      const itemId = $(this).closest('.panel').attr('id')
+      const itemName = $(this).closest('.row').find("[name='order[item_name]']").val()
+      const itemPrice = parseFloat(
+                    $(this)
+                    .closest('.row')
+                    .find("[name='order[item_price]']")
+                    .val())
+                    .toFixed(2)
+
+      const itemNameHTML = "<div class='row sale-item'>" +
                       "<div class='col-md-6 item-name'>" + 
                         itemName + 
                       "</div>" + 
                       "<div class='col-md-6 text-right'>" +
                         "<i class='fa fa-times fa-2x delete-item'></i>" +
                       "</div>" +
-                      "<div class='col-md-12 add-note'" +
-                        '<a>' +
-                          '+ Add Note'
-                        '</a>' +
+                      "<div class='col-md-12 price'>" +
+                        `$${itemPrice}` +
                     "</div>"
       $('<input>').attr({
         type: 'hidden',
@@ -88,10 +101,12 @@
       }).appendTo('form');
       $('.current-sale .items').append(itemNameHTML)
 
-      RefreshEventListener();
+      refreshEventListener();
+
+      calculateTotal()
     });
 
-    function RefreshEventListener() {
+    function refreshEventListener() {
       // on.click() wasn't working for dynamically added items
       // so the event listeners are reset every time an item is added
       $(".delete-item").off(); 
@@ -99,5 +114,19 @@
       $(".delete-item").on("click", function() {
         $(this).closest('.row.item').remove()
       })
+    }
+
+    function calculateTotal() {
+      const salePrices = $('.sale-item')
+      let total = 0.00
+
+      $('.sale-item').each(function(i, obj) {
+        const itemPriceString = $(obj).find('.price').text()
+        
+        const itemPriceFloat = parseFloat(itemPriceString.replace(/\$/g, ''))
+        total += itemPriceFloat
+      });
+
+      $('.total').html(`<label>$${total.toFixed(2)}</label>`)
     }
   });

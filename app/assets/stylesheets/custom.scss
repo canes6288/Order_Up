@@ -113,16 +113,22 @@ hr {
   max-height: 665px;
 }
 
-.new-order .current-sale .panel {
-	margin-top: 10px;
-	padding-top: 10px;
-	height: inherit;
-	min-height: 98%;
-	border-bottom: none;
-}
-
 .new-order .current-sale .add-note {
 	color:#14B1FF
+}
+
+
+.new-order .current-sale .delete-item {
+	color: red;
+	padding-right: 50px;
+	margin-top: 20px;
+	cursor: pointer;
+}
+
+
+.new-order .current-sale .items {
+	overflow-y: auto;
+	max-height: 550px;
 }
 
 .new-order .current-sale .item-name {
@@ -131,16 +137,16 @@ hr {
 	margin-top: 20px;
 }
 
-.new-order .current-sale .items {
-	overflow-y: auto;
-	max-height: 550px;
+.new-order .current-sale .panel {
+	margin-top: 10px;
+	padding-top: 10px;
+	height: inherit;
+	min-height: 98%;
+	border-bottom: none;
 }
 
-.new-order .current-sale .delete-item {
-	color: red;
-	padding-right: 50px;
-	margin-top: 20px;
-	cursor: pointer;
+.new-order .current-sale .total {
+	text-align: right;
 }
 
 .big-blue-btn {
@@ -191,6 +197,11 @@ hr {
 	height: inherit;
 	padding-top: 0px;
 	margin-bottom: 30px;
+}
+
+.orders .total {
+	font-size: 24px;
+	font-weight: 600;
 }
 
 .panel {
