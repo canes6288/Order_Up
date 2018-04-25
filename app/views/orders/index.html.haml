@@ -3,7 +3,7 @@
 
 .orders
   - @orders.each do |order|
-    = render partial: 'order', locals: { order: order }
+    = render partial: 'order', locals: { order: order, restaurant: @restaurant }
 
 
 

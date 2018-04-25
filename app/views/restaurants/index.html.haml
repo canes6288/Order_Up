@@ -9,8 +9,10 @@
     - @restaurants.each do |restaurant|
       %tr
         %td
-          = link_to restaurant.name, orders_path(restaurant_id: restaurant.id)
-        %td= link_to 'Show', restaurant
+          = link_to restaurant.name, restaurant_orders_path(restaurant)
+      %tr
+        %td= link_to 'Items', restaurant_items_path(restaurant)
+        %td= link_to 'Orders', restaurant_orders_path(restaurant)
         %td= link_to 'Edit', edit_restaurant_path(restaurant)
         %td= link_to 'Destroy', restaurant, method: :delete, data: { confirm: 'Are you sure?' }
 %br/

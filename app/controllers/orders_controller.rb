@@ -63,8 +63,9 @@ class OrdersController < ApplicationController
   # DELETE /orders/1
   # DELETE /orders/1.json
   def destroy
+    @restaurant = Restaurant.find(params[:restaurant_id])
     @order.destroy
-    redirect_to orders_path(restaurant_id: @order.restaurant), notice: 'Order completed.'
+    redirect_to restaurant_orders_path(restaurant: @restaurant), notice: 'Order completed.'
   end
 
   private

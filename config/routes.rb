@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
-  resources :restaurants
-  resources :items
-  resources :orders
-	root 'orders#new' 
+	root 'orders#new'
 
+  resources :restaurants do
+		resources :items
+	  resources :orders, only: [:index, :destroy]
+	end
+
+	resources :orders, only: [:new, :create]
+	
   devise_for :users
   
   mount ActionCable.server => '/cable'

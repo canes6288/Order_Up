@@ -4,7 +4,7 @@
     .col-md-9
       %h1 Items
     .col-md-3
-      = link_to "<i class='fa fa-plus-circle' style='padding-right: 10px'></i> New Item".html_safe, new_item_path, class: 'btn btn-primary big-blue-btn', style: 'padding-top: 10px;'
+      = link_to "<i class='fa fa-plus-circle' style='padding-right: 10px'></i> New Item".html_safe, new_restaurant_item_path(@restaurant), class: 'btn btn-primary big-blue-btn', style: 'padding-top: 10px;'
   %table.table.table-striped
     %thead
       %tr
@@ -18,10 +18,10 @@
         %tr
           %th{ scope: 'row'}= (index + 1)
           %td
-            = link_to item.name, edit_item_path(item)
+            = link_to item.name, edit_restaurant_item_path(@restaurant, item)
           %td
             = number_to_currency(item.price)
           %td
-            = item.restaurant.name
+            = @restaurant.name
           %td
-            = link_to "<i style='color: red' class='fa fa-times fa-2x'></i>".html_safe, item, method: :delete, data: { confirm: 'Are you sure?' }
+            = link_to "<i style='color: red' class='fa fa-times fa-2x'></i>".html_safe, restaurant_item_path(@restaurant, item), method: :delete, data: { confirm: 'Are you sure?' }

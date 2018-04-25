@@ -1,4 +1,5 @@
-= form_for(item) do |f|
+= form_for item, :url => { :action => "create" } do |f|
+  = f.hidden_field :restaurant_id, value: restaurant.id
   - if item.errors.any?
     #error_explanation
       %h2
@@ -23,16 +24,6 @@
                 %label.btn.btn-secondary{ class: "#{'active' if item.available?} " }
                   = f.radio_button :sold_out, false, :checked => item.available?, autocomplete: "off"
                   No
-
-    .col-md-3.section.location-selection
-      .panel
-        .field
-          .row
-            .col-md-12
-              = f.label :restaurant_id
-              %hr
-            .col-md-12
-              = f.select :restaurant_id, Restaurant.all.collect { |r| [ r.name, r.id ] }, prompt: 'Restaurant'
     .col-md-3.section
       .panel
         .field
@@ -50,11 +41,11 @@
               = f.label :price
               %hr
             .col-md-12
-              = f.text_field :price, value: number_with_precision(f.object.price, :precision => 2)
-    .row
-      .text-center.col-md-12
-        %button.btn.btn-primary.big-blue-btn{ type: "submit" }
-          = "#{item.persisted? ? 'Update Item' : 'Create Item'}"
+              = f.text_field :price, value: number_with_precision(item.price, :precision => 2)
+  .row{ style: 'margin-top: 20px;' }
+    .text-center.col-md-3
+      %button.btn.btn-primary.big-blue-btn{ type: "submit" }
+        = "#{item.persisted? ? 'Update Item' : 'Create Item'}"
 
 
 
