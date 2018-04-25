@@ -12,4 +12,14 @@ FactoryBot.define do
 		email { Faker::Internet.email }
 		password 'password'
 	end
+
+	factory :order do
+		restaurant
+		section 'A'
+		seat '1'
+
+		trait :completed do
+			deleted_at Time.current
+		end
+	end
 end

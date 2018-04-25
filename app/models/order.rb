@@ -13,12 +13,9 @@ class Order < ApplicationRecord
 	before_save :set_location
 	after_commit :broadcast_order, on: :create
 
+	scope :completed, -> { only_deleted }
 
 	SECTION = ['A', 'B', 'C', 'D', 'E']
-
-	def self.completed
-		only_deleted
-	end
 
 	private
 
