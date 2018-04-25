@@ -7,6 +7,13 @@ class RestaurantsController < ApplicationController
     @restaurants = Restaurant.all
   end
 
+  def recap
+    @restaurant = Restaurant.find(params[:id])
+    orders = @restaurant.orders
+
+    @orders_by_day = orders.group_by_day(&:created_at)
+  end
+
   # GET /restaurants/1
   # GET /restaurants/1.json
   def show

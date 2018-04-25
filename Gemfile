@@ -54,6 +54,9 @@ gem'rb-readline'
 # calling destroy on an ActiveRecord object without actually destroying it
 gem "paranoia", "~> 2.2"
 
+# Able to group objects by date
+gem 'groupdate'
+
 group :development, :test do
   gem 'pry'
   # Strategies to clean database after running tests

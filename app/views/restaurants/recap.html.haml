@@ -1,0 +1,42 @@
+%h1 Recap
+- @orders_by_day.each do |date, orders|
+  %table.table.table-striped
+    %thead
+      %tr
+        %th Date
+        %th Time
+        %th Order Number
+        %th Location
+        %th Section
+        %th Seat
+        %th Total
+    %tbody
+      - orders.each do |order|
+        %tr
+          %td
+            = order.created_at.strftime("%m/%d/%Y")
+          %td
+            = order.created_at.strftime("%-l:%M %p")
+          %td
+            = "##{order.number}" 
+          %td
+            = order.location 
+          %td
+            = order.section
+          %td
+            = order.seat
+          %td
+            = number_to_currency(order.items.pluck(:price).sum)
+      %tr
+        %td
+        %td
+        %td
+        %td
+        %td
+        %td
+          TOTAL
+        %td
+          - total = 0
+          - orders.each do |order|
+            - total += order.items.pluck(:price).sum
+          = number_to_currency(total)

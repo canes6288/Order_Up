@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 	root 'orders#new'
 
   resources :restaurants do
+  	get :recap, on: :member
 		resources :items
 	  resources :orders, only: [:index, :destroy]
 	end

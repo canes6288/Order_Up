@@ -22,4 +22,4 @@
               Total:
           .col-md-1
             %label
-              = "$#{order.items.pluck(:price).sum}"
+              = number_to_currency(order.items.pluck(:price).sum)
