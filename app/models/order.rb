@@ -16,6 +16,10 @@ class Order < ApplicationRecord
 
 	SECTION = ['A', 'B', 'C', 'D', 'E']
 
+	def self.completed
+		only_deleted
+	end
+
 	private
 
 		def broadcast_order

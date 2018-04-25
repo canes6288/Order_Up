@@ -9,9 +9,9 @@ class RestaurantsController < ApplicationController
 
   def recap
     @restaurant = Restaurant.find(params[:id])
-    orders = @restaurant.orders
+    orders = @restaurant.orders.completed
 
-    @orders_by_day = orders.group_by_day(&:created_at)
+    @orders_by_day = orders.group_by_day(&:created_at).to_a.reverse.to_h
   end
 
   # GET /restaurants/1
