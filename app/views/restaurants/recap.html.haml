@@ -1,6 +1,6 @@
 %h1 Recap
 - @orders_by_day.each do |date, orders|
-  %table.table.table-striped
+  %table.table.table-striped{ data: { section: date.strftime("%m/%d/%Y") } }
     %thead
       %tr
         %th Date
@@ -26,7 +26,7 @@
           %td
             = order.seat
           %td
-            = number_to_currency(order.items.pluck(:price).sum)
+            = number_to_currency(order.total)
       %tr
         %td
         %td

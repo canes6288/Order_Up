@@ -20,10 +20,18 @@ module FeatureMacros
 		all(action_selector(action))
 	end
 
+	def find_section(section)
+		section_selector(section)
+	end
+
 	private
 
 		def action_selector(action)
 			"[data-action='#{action}']"
+		end
+
+		def section_selector(section)
+			"[data-section='#{section}']"			
 		end
 end
 

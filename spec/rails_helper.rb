@@ -64,10 +64,18 @@ RSpec.configure do |config|
   end
 end
 
-Capybara.javascript_driver = :selenium
-Capybara.current_driver = Capybara.javascript_driver
 Capybara.server = :puma
 
-Capybara::Webkit.configure do |config|
-  config.allow_url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700")
+Capybara.register_driver :chrome do |app|
+  Capybara::Selenium::Driver.new(app, browser: :crhome)
 end
+
+Capybara.register_driver :headless_chrome do |app|
+  desired_capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
+    chromeOPtions: { args: %w(headless disable-gpu no-sandbox window-size=1920,1080) }  
+  )
+
+  Capybara::Selenium::Driver.new app, browser: :chrome, desired_capabilities: desired_capabilities
+end
+
+Capybara.javascript_driver = :headless_chrome

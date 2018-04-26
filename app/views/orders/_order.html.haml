@@ -4,7 +4,10 @@
       .row.details
         .col-md-10.header
           = "##{order.number} #{order.location} - #{order.section}#{order.seat} (#{order.created_at.strftime("%-l:%M %p")})"
-        .col-md-2.text-right
+          %span{ data: { action: 'cancel-order' } } 
+            = link_to restaurant_order_path(order.restaurant, order, cancelled: true), method: :delete, class: 'cancel-order' do
+              Cancel Order
+        .col-md-2.text-right.complete-order
           = link_to restaurant_order_path(order.restaurant, order), method: :delete do
             %button.btn.btn-primary{ type: "button", class: 'complete-btn', data: { action: 'complete-order' } } 
               = fa_icon "check-circle", text: 'Done'
@@ -22,4 +25,4 @@
               Total:
           .col-md-1
             %label
-              = number_to_currency(order.items.pluck(:price).sum)
+              = number_to_currency(order.total)

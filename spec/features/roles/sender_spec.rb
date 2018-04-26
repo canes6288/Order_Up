@@ -8,7 +8,7 @@ feature 'Sender' do
 	# let!(:item_3) { create(:item, restaurant_id: restaurant.id) }
 
 	xcontext 'when a Sender arrives to orders#new' do
-		scenario 'the restaurant dropdown is visible', focus: true, js: true do
+		scenario 'the restaurant dropdown is visible', js: true do
 			user = create(:user)
 			restaurant = create(:restaurant)
 			create(:item, restaurant: restaurant)

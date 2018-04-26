@@ -13,9 +13,17 @@ class Order < ApplicationRecord
 	before_save :set_location
 	after_commit :broadcast_order, on: :create
 
-	scope :completed, -> { only_deleted }
+	scope :completed, -> { only_deleted.where(cancelled: [nil, false]) }
 
 	SECTION = ['A', 'B', 'C', 'D', 'E']
+
+	def cancel
+		update(cancelled: true)
+	end
+
+	def total
+		items.pluck(:price).sum
+	end
 
 	private
 

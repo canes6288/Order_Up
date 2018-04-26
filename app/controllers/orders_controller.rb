@@ -64,8 +64,15 @@ class OrdersController < ApplicationController
   # DELETE /orders/1.json
   def destroy
     @restaurant = Restaurant.find(params[:restaurant_id])
+
     @order.destroy
-    redirect_to restaurant_orders_path(restaurant: @restaurant), notice: 'Order completed.'
+    
+    if cancelled?
+      @order.cancel
+      return redirect_to restaurant_orders_path(restaurant: @restaurant), alert: 'Order cancelled'
+    end
+
+    redirect_to restaurant_orders_path(restaurant: @restaurant), notice: 'Order completed'
   end
 
   private
@@ -73,6 +80,10 @@ class OrdersController < ApplicationController
       item_ids.each do |item_id|
         @order.line_items.build(order: @order, item_id: item_id)
       end
+    end
+
+    def cancelled?
+      params[:cancelled] == 'true'
     end
 
     def items_attributes

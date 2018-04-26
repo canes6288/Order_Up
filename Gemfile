@@ -62,7 +62,7 @@ group :development, :test do
   # Strategies to clean database after running tests
   gem 'capybara'
   # For Javascript testing with headless browser
-  gem "capybara-webkit"
+  gem 'selenium-webdriver'
   # launches save_and_open_page automatically
   gem 'launchy'
   # Fixtures replacement
