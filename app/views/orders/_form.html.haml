@@ -58,6 +58,15 @@
               $0.00
         %hr
         .items
+          - @order&.line_items.each do |line_item|
+            .row.sale-item
+              %input{ name: "items_attributes[][id]", type: "hidden", value: line_item.item.id }/
+              .col-md-6.item-name
+                = line_item.name
+              .col-md-6.text-right
+                %i.fa.fa-times.fa-2x.delete-item
+              .col-md-12.price
+                = number_to_currency(line_item.price)
       .row
         .text-center.col-md-12.actions
           %button.btn.btn-primary.big-blue-btn{ type: "submit", data: { action: 'complete-order' } } 
@@ -67,6 +76,9 @@
 :javascript
   console.log('hello from _form')
   $(document).ready(function() {
+    // Calculate the total when arriving to the screen
+    calculateTotal()
+
     // Delete Item
     $('body').on('click', '.delete-item', function() {
       $(this).closest('.row.sale-item').remove()
