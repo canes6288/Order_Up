@@ -1,12 +1,10 @@
 = form_for order, :url => { :action => "create" } do |f|
-  - if order.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(order.errors.count, "error")
-        prohibited this order from being saved:
-      %ul
+  .row.errors
+    .col-md-12
+      - if order.errors.any?
         - order.errors.full_messages.each do |message|
-          %li= message
+          %p.alert.alert-danger 
+            = message
   .row.new-order
     .col-md-3.section.location-selection
       .panel
