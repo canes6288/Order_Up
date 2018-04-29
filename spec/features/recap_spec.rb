@@ -2,6 +2,16 @@ require 'rails_helper'
 
 feature 'Recap' do
 	context 'when a user arrives at restaurants#recap' do
+		scenario 'no orders have been created ever' do
+			user = create(:user)
+			restaurant = create(:restaurant)
+
+			sign_in(user)
+
+			visit recap_restaurant_path(restaurant)
+			expect(page).to have_content('Recap')
+		end
+
 		scenario 'the completed orders are separated by day' do
 			user = create(:user)
 			restaurant = create(:restaurant)
