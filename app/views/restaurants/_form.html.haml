@@ -1,0 +1,23 @@
+= form_for(restaurant) do |f|
+  - if restaurant.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(restaurant.errors.count, "error")
+        prohibited this restaurant from being saved:
+      %ul
+        - restaurant.errors.full_messages.each do |message|
+          %li= message
+  .row.custom-form
+    .col-md-3.section
+      .panel
+        .field
+          .row
+            .col-md-12
+              = f.label :name
+              %hr
+            .col-md-12
+              = f.text_field :name
+  .row{ style: 'margin-top: 20px;' }
+    .text-center.col-md-3
+      %button.btn.btn-primary.big-blue-btn{ type: "submit" }
+        = "#{restaurant.persisted? ? 'Update Restaurant' : 'Create Restaurant'}"

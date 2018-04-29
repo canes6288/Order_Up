@@ -1,9 +1,9 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
-  before_action :set_restaurant, only: [:index, :new, :create, :destroy]
+  before_action :set_restaurant
 
   def index
-    @items = Item.where(restaurant: @restaurant)
+    @items = Item.where(restaurant: @restaurant).order(:name)
   end
 
   def show
@@ -33,7 +33,7 @@ class ItemsController < ApplicationController
   def update
     respond_to do |format|
       if @item.update(item_params)
-        format.html { redirect_to @item, notice: 'Item was successfully updated.' }
+        format.html { redirect_to restaurant_items_path(@restaurant), notice: 'Item was successfully updated.' }
         format.json { render :show, status: :ok, location: @item }
       else
         format.html { render :edit }

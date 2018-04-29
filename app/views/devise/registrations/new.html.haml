@@ -1,0 +1,41 @@
+%h1 
+  Sign up
+= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+  = devise_error_messages!
+  .row.custom-form
+    .col-md-3.section
+      .panel
+        .field
+          .row
+            .col-md-12
+              = f.label :email
+              %hr
+            .col-md-12
+              = f.email_field :email, autofocus: true, autocomplete: "email"
+  .row.custom-form
+    .col-md-3.section
+      .panel{ style: 'height: 175px' }
+        .field
+          .row
+            .col-md-12
+              = f.label :password
+            .col-md-12
+              %i (leave blank if you don't want to change it)
+              %hr
+            .col-md-12
+              = f.password_field :password, autocomplete: "off"
+  .row.custom-form
+    .col-md-3.section
+      .panel
+        .field
+          .row
+            .col-md-12
+              = f.label :password_confirmation
+              %hr
+            .col-md-12
+              = f.password_field :password_confirmation, autocomplete: "off"
+  .row{ style: 'margin-top: 20px;' }
+    .text-center.col-md-3
+      %button.btn.btn-primary.big-blue-btn{ type: "submit" }
+        Sign Up
+= render "devise/shared/links"

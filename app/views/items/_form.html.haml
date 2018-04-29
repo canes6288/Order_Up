@@ -1,5 +1,4 @@
-= form_for item, :url => { :action => "create" } do |f|
-  = f.hidden_field :restaurant_id, value: restaurant.id
+= form_for item, url: restaurant_item_path do |f|
   - if item.errors.any?
     #error_explanation
       %h2
@@ -8,7 +7,7 @@
       %ul
         - item.errors.full_messages.each do |message|
           %li= message
-  .row.new-item
+  .row.custom-form
     .col-md-3.section
       .panel
         .field
