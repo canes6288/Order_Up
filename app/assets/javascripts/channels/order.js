@@ -11,5 +11,10 @@ App.order = App.cable.subscriptions.create("OrderChannel", {
 
   received(data) {
   	$('.orders').append(data['html'])
+    $('.new-order').remove()
+    var newOrderHtml = "<div class='row new-order'><div class='col-md-12'><p class='alert alert-success'>New Order!</p></div></div>"
+    $('.order:last').before(newOrderHtml)
+    
+    $("#topbar").slideToggle().delay(6000).slideToggle(); 
   },
 });

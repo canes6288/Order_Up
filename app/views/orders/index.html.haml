@@ -1,8 +1,11 @@
+.row.hidden#topbar
+	.col-md-12.text-center
+		.alert.alert-success
+			New order! Order details will appear at the bottom of the page.
 %h1 Orders
-
 .orders
-  - @orders.each do |order|
-    = render partial: 'order', locals: { order: order, restaurant: @restaurant }
+	- @orders.each do |order|
+		= render partial: 'order', locals: { order: order, restaurant: @restaurant }
 
 
 

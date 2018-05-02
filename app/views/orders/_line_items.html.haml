@@ -6,13 +6,14 @@
   - line_items_without_notes = line_items.reject(&:notes)
 
   / Show line_items with notes (for this item) individually
-  - line_items_with_notes.each do |line_item|
-    .row.order
-      .col-md-6.item-name
+  /
+    - line_items_with_notes.each do |line_item|
+      .row
+        .col-md-6.item-name
         = "(1) #{line_item.item.name}"
-      .col-md-6.item-notes
-        = line_item.notes
-    %hr
+        .col-md-6.item-notes
+        = #line_item.notes
+      %hr
 
   / Group all the line_items without notes (for this item) together
   .row

@@ -1,4 +1,4 @@
-.row
+.row.order
   .col-md-12
     .panel
       .row.details
@@ -16,8 +16,6 @@
         .row.header
           .col-md-6
             Item
-          .col-md-6
-            Notes
         = render partial: 'orders/line_items', locals: { order: order }
         .row.total
           .col-md-1
