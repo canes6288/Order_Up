@@ -17,15 +17,15 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.new(item_params)
+    item = @restaurant.items.new(item_params)
 
     respond_to do |format|
-      if @item.save
+      if item.save
         format.html { redirect_to restaurant_items_path(@restaurant), notice: 'Item was successfully created.' }
-        format.json { render :show, status: :created, location: @item }
+        format.json { render :show, status: :created, location: item }
       else
         format.html { render :new }
-        format.json { render json: @item.errors, status: :unprocessable_entity }
+        format.json { render json: item.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -64,6 +64,6 @@ class ItemsController < ApplicationController
       price = params[:item][:price].to_s.gsub(/[^\d.]/, '')
       params[:item][:price] = price
 
-      params.require(:item).permit(:name, :price, :restaurant_id, :sold_out)
+      params.require(:item).permit(:name, :price, :sold_out)
     end
 end

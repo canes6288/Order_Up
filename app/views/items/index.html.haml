@@ -10,7 +10,7 @@
         %th{ scope: 'col'} #
         %th{ scope: 'col'} Name
         %th{ scope: 'col'} Price
-        %th{ scope: 'col'} Restaurant
+        %th{ scope: 'col'} Sold Out?
         %th{ scope: 'col'} Delete
     %tbody
       - @items.each_with_index do |item, index|
@@ -21,6 +21,6 @@
           %td
             = number_to_currency(item.price)
           %td
-            = @restaurant.name
+            = item.sold_out? ? 'Yes' : 'No'
           %td
             = link_to "<i style='color: red' class='fa fa-times fa-2x'></i>".html_safe, restaurant_item_path(@restaurant, item), method: :delete, data: { confirm: 'Are you sure?' }
