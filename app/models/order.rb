@@ -11,6 +11,7 @@ class Order < ApplicationRecord
 	validates_presence_of :seat
 
 	before_save :set_location
+	before_save :set_number
 	after_commit :broadcast_order, on: :create
 
 	scope :completed, -> { only_deleted.where(cancelled: [nil, false]) }
@@ -38,5 +39,11 @@ class Order < ApplicationRecord
 
 		def set_location
 			self.location = ['A', 'B', 'C'].include?(section) ? 'BREW' : 'COMD'
+		end
+
+		def set_number
+			last_order_id = Order.last&.id || 0
+			order_number = last_order_id.to_s.last(3).to_i
+			self.number = order_number
 		end
 end

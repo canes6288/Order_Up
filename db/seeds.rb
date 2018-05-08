@@ -30,19 +30,6 @@ restaurant = Restaurant.create(
 	)
 
 ##################
-#     ORDERS     #
-##################
-
-order = Order.create(
-		number: 111,
-		location: 'BREW',
-		section: 'B',
-		restaurant_id: restaurant.id,
-		user_id: user.id,
-		seat: 5,
-	)
-
-##################
 #     ITEMS      #
 ##################
 
@@ -92,6 +79,23 @@ item_8 = Item.create(
 		name: 'Peppermint Patty',
 		price: 77.99,
 		restaurant_id: restaurant.id,
+	)
+
+##################
+#     ORDERS     #
+##################
+
+
+location = ['COMD', 'BREW'].sample
+section = ['A', 'B', 'C', 'D', 'E'].sample
+seat = Random.rand(50)
+
+order = Order.create(
+		location: location,
+		section: 'B',
+		restaurant_id: restaurant.id,
+		user_id: user.id,
+		seat: seat,
 	)
 
 #######################
