@@ -34,7 +34,7 @@
     .col-md-5.items.section
       %label
         Items
-      - Item.all.each do |item|
+      - Item.available.order(:name).each do |item|
         .panel{ id: item.id}
           .row
             .col-md-5.name

@@ -3,8 +3,6 @@
   .row.header
     .col-md-9
       %h1 Restaurants
-    .col-md-3
-      = link_to "<i class='fa fa-plus-circle' style='padding-right: 10px'></i> New Restaurant".html_safe, new_restaurant_path, class: 'btn btn-primary big-blue-btn', style: 'padding-top: 10px;'
 %table.table.table-striped
   %thead
     %tr
@@ -12,13 +10,10 @@
       %th Orders
       %th Items
       %th Recap
-      %th Delete
   %tbody
     - @restaurants.each do |restaurant|
       %tr
-        %td
-          = link_to restaurant.name, edit_restaurant_path(restaurant)
+        %td= restaurant.name
         %td= link_to 'Orders', restaurant_orders_path(restaurant)
         %td= link_to 'Items', restaurant_items_path(restaurant)
         %td= link_to 'Recap', recap_restaurant_path(restaurant)
-        %td= link_to "<i style='color: red' class='fa fa-times fa-2x'></i>".html_safe, restaurant, method: :delete, data: { confirm: 'Are you sure?' }
