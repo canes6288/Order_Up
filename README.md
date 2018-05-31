@@ -1,24 +1,42 @@
-# README
+# Order Up
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Dependencies
 
-Things you may want to cover:
+Before using Order Up, you'll need ruby (duh) and bundler. Install using `gem install bundler`.
 
-* Ruby version
+To use the gem `capybara-webkit`, which we use for feature specs, you may need `qt` (see [these instructions](https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit)). The issues with capybara are [documented here](https://github.com/thoughtbot/capybara-webkit#qt-dependency-and-installation-issues).
 
-* System dependencies
+You also need a locally running `postgresql` database. We recommend installing postgresql/qt with [Homebrew](https://brew.sh/):
 
-* Configuration
+```
+brew install postgres
+brew install qt
+```
 
-* Database creation
+### Installation
 
-* Database initialization
+Once you have these basics, run:
 
-* How to run the test suite
+```
+git clone git@github.com:canes6288/Order_Up.git
+cd Order_Up
+bundle install
+bundle exec rake db:create:all
+bundle exec rake db:migrate
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+### Testing
 
-* Deployment instructions
+We use `rspec` as a test framework. To run the suite, use:
 
-* ...
+```
+bundle exec rspec
+```
+
+### Contributing
+
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request
