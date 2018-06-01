@@ -5,7 +5,7 @@ class OrdersController < ApplicationController
   # GET /orders.json
   def index
     @restaurant = Restaurant.find(params[:restaurant_id])
-    @orders = Order.where(restaurant: @restaurant)
+    @orders = Order.where(restaurant: @restaurant).order(created_at: :asc)
   end
 
   # GET /orders/1
@@ -34,7 +34,7 @@ class OrdersController < ApplicationController
     end
 
     # Add item to the order
-    build_items_for_order(item_ids)
+    build_items_for_order(items_attributes)
 
     # Set user_id to the sender's id
     @order.user_id = current_user.id
@@ -76,9 +76,12 @@ class OrdersController < ApplicationController
   end
 
   private
-    def build_items_for_order(item_ids)
-      item_ids.each do |item_id|
-        @order.line_items.build(order: @order, item_id: item_id)
+    def build_items_for_order(items_attributes)
+      items_attributes.each do |_index, attributes|
+        @order.line_items.build(
+          order: @order, 
+          item_id: attributes[:id], 
+          notes: attributes[:notes])
       end
     end
 
@@ -88,10 +91,6 @@ class OrdersController < ApplicationController
 
     def items_attributes
       params[:items_attributes]
-    end
-
-    def item_ids
-      items_attributes.pluck(:id).map(&:to_i)
     end
 
     # Use callbacks to share common setup or constraints between actions.

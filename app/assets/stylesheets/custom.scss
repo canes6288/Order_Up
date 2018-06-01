@@ -118,7 +118,13 @@ hr {
 }
 
 .new-order .current-sale .add-note {
-	color:#14B1FF
+	color:#14B1FF;
+	margin-top: 10px;
+	cursor: pointer;
+}
+
+.new-order .note {
+	width: 100%;
 }
 
 
